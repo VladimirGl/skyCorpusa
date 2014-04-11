@@ -6,10 +6,43 @@
 #ifndef IMAGE_READER_H
 #define IMAGE_READER_H
 
+#include <QImage>
+#include <QString>
+
+namespace imProcess {
+
 class ImageReader
 {
 public:
+  enum FromType {
+    File = 0,
+    Camera
+  };
+
   ImageReader();
+
+  void setHeight(int height) { mH = height; }
+  void setWidth(int width) { mW = width; }
+
+  void setType(FromType type) { mFrom = type; }
+  void setFPath(const QString& path) { mPath = path; }
+
+  int w() const { return mW; }
+  int h() const { return mH; }
+
+  QString path() const { return mPath; }
+  FromType fromType() const { return mFrom; }
+
+  QImage image() const;
+
+private:
+  int mH;
+  int mW;
+
+  QString mPath;
+  FromType mFrom;
 };
+
+}  // namespace imProcess
 
 #endif // IMAGE_READER_H

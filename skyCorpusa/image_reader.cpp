@@ -5,6 +5,24 @@
 
 #include "image_reader.h"
 
-ImageReader::ImageReader()
-{
+namespace imProcess {
+
+ImageReader::ImageReader() :
+  mH(480),
+  mW(640),
+  mPath(""),
+  mFrom(File)
+{}
+
+QImage ImageReader::image() const {
+
+  if (mFrom == File) {
+    QImage im(mPath);
+    im.scaled(mW, mH);
+    return im;
+  }
+
+  // DO IMAGE CAPTURE
 }
+
+}  // namespace imProcess
