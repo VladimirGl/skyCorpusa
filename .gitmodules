@@ -1,0 +1,3 @@
+[submodule "third_part"]
+	path = third_part
+	url = https://github.com/it-workshop/caroline-thirdparty-opencv-mirror
