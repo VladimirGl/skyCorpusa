@@ -17,6 +17,14 @@ enum CloudLevel {
   ExtremelyHazy
 };
 
+enum SkyColor {
+  DeepBlue = 1,
+  Blue,
+  LightBlue,
+  PaleBlue,
+  Milky
+};
+
 class ImProcessingData
 {
 public:

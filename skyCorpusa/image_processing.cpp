@@ -113,8 +113,6 @@ void ImageProcessing::skyProcessing() {
     }
   }
 
-  qDebug() << mSkyCount;
-
   if (mSkyCount) {
     sRed   /= mSkyCount;
     sGreen /= mSkyCount;
@@ -165,8 +163,6 @@ void ImageProcessing::cloudProcessing() {
       }
     }
   }
-  qDebug() << mCloudCount;
-  qDebug() << mSkyCount;
 
   if (mCloudCount) {
 
@@ -224,19 +220,23 @@ bool ImageProcessing::isCloud(int R, int G, int B) const {
 
 int ImageProcessing::toSkyLevel() const {
   int l = (mSkyR + mSkyG + mSkyB) / 3;
+  int type[5];
+  type[0] = (128 - mSkyR) * (128 - mSkyR) + (149 - mSkyG) * (149 - mSkyG);
+  type[1] = (165 - mSkyR) * (165 - mSkyR) + (181 - mSkyG) * (181 - mSkyG);
+  type[2] = (192 - mSkyR) * (192 - mSkyR) + (208 - mSkyG) * (208 - mSkyG);
+  type[3] = (219 - mSkyR) * (219 - mSkyR) + (230 - mSkyG) * (230 - mSkyG);
+  type[4] = (244 - mSkyR) * (244 - mSkyR) + (252 - mSkyG) * (252 - mSkyG);
 
-  l = 255 - l;
-  if (l < 50) {
-    return 1;
-  } else if (l < 100) {
-    return 2;
-  } else if (l < 150) {
-    return 3;
-  } else if (l < 200) {
-    return 4;
+  int min = type[0];
+  int count = 0;
+  for (int i = 1; i < 5; i++) {
+    if (type[i] < min) {
+      min = type[i];
+      count = i;
+    }
   }
 
-  return 5;
+  return (count + 1);
 }
 
 int ImageProcessing::toCloudLevel() const {
