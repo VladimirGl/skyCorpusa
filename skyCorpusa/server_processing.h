@@ -6,6 +6,9 @@
 #ifndef SERVER_PROCESSING_H
 #define SERVER_PROCESSING_H
 
+namespace skyCorpusa {
+namespace server {
+
 class ServerProcessing
 {
 public:
@@ -13,5 +16,9 @@ public:
 
 private:
 };
+
+}  // namespace server
+}  // namespace skyCorpusa
+
 
 #endif // SERVER_PROCESSING_H

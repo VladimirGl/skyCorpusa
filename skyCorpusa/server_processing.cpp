@@ -5,6 +5,12 @@
 
 #include "server_processing.h"
 
+namespace skyCorpusa {
+namespace server {
+
 ServerProcessing::ServerProcessing()
 {
 }
+
+}  // namespace server
+}  // namespace skyCorpusa
