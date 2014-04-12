@@ -5,6 +5,14 @@
 
 #include "image_processing.h"
 
+namespace imProcess {
+
 ImageProcessing::ImageProcessing()
 {
 }
+
+void ImageProcessing::compute() {
+  // TODO
+}
+
+}  // namespace imProcess

@@ -7,8 +7,48 @@
 
 namespace imProcess {
 
+const int querySize = 10;
+
 ImageCollection::ImageCollection()
 {
+}
+
+void ImageCollection::addImage(const QImage &im, const ImProcessingData &proc, int aData) {
+  mCollection.prepend(im);
+  mProcesssingData.prepend(proc);
+  mAeroData.prepend(aData);
+
+  int size = mCollection.length();
+
+  if (size > querySize) {
+    mCollection.removeLast();
+    mProcesssingData.removeLast();
+    mAeroData.removeLast();
+  }
+}
+
+QImage ImageCollection::image(int num) const {
+  if (num >= length()) {
+    return QImage();
+  }
+
+  return mCollection.at(num);
+}
+
+ImProcessingData ImageCollection::data(int num) const {
+  if (num >= length()) {
+    return ImProcessingData();
+  }
+
+  return mProcesssingData.at(num);
+}
+
+int ImageCollection::aeroData(int num) const {
+  if (num >= length()) {
+    return -1;
+  }
+
+  return mAeroData.at(num);
 }
 
 }  // namespace imProcessing

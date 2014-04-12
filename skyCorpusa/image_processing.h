@@ -6,10 +6,30 @@
 #ifndef IMAGE_PROCESSING_H
 #define IMAGE_PROCESSING_H
 
+#include <QImage>
+
+#include "im_processing_data.h"
+
+namespace imProcess {
+
 class ImageProcessing
 {
 public:
   ImageProcessing();
+
+  void loadImage(const QImage& image) { mImage = image; }
+  ImProcessingData processed() const { return mData; }
+
+  // Main method of the class. Here are made all the callculation.
+  // Look ImProcessingData class and inside this method for more information.
+  void compute();
+
+private:
+  QImage mImage;
+
+  ImProcessingData mData;
 };
+
+}  // namespace imProcess
 
 #endif // IMAGE_PROCESSING_H

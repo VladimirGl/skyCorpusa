@@ -11,7 +11,12 @@ namespace imProcess {
 class ImProcessingData
 {
 public:
-  ImProcessingData();
+  ImProcessingData() :
+    mSkyColor(0),
+    mCloudLevel(0),
+    mCloudType(0),
+    mSunLevel(0)
+  {}
 
   void setSkyColor(int color) { mSkyColor = color; }
   void setCloudLevel(int level) { mCloudLevel = level; }

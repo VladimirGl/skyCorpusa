@@ -19,6 +19,9 @@ public:
   ImageCollection();
 
   void addImage(const QImage& im, const ImProcessingData& proc, int aData);
+
+  int length() const { return mCollection.length(); }
+
   QImage image(int num) const;
   ImProcessingData data(int num) const;
   int aeroData(int num) const;
