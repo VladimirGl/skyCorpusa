@@ -6,6 +6,7 @@
 #ifndef IM_PROCESSING_DATA_H
 #define IM_PROCESSING_DATA_H
 
+namespace skyCorpusa {
 namespace imProcess {
 
 class ImProcessingData
@@ -36,5 +37,6 @@ private:
 };
 
 }  // namespace imProcess
+}  // namespace skyCorpusa
 
 #endif // IM_PROCESSING_DATA_H

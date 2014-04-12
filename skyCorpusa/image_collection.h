@@ -11,6 +11,7 @@
 
 #include "im_processing_data.h"
 
+namespace skyCorpusa {
 namespace imProcess {
 
 class ImageCollection
@@ -34,5 +35,6 @@ private:
 };
 
 }  // namespace imProcess
+}  // namespace skyCorpusa
 
 #endif // IMAGE_COLLECTION_H

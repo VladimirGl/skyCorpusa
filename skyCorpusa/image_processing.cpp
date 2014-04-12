@@ -5,6 +5,7 @@
 
 #include "image_processing.h"
 
+namespace skyCorpusa {
 namespace imProcess {
 
 ImageProcessing::ImageProcessing()
@@ -16,3 +17,4 @@ void ImageProcessing::compute() {
 }
 
 }  // namespace imProcess
+}  // namespace skyCorpusa

@@ -9,6 +9,7 @@
 #include <QImage>
 #include <QString>
 
+namespace skyCorpusa {
 namespace imProcess {
 
 class ImageReader
@@ -44,5 +45,6 @@ private:
 };
 
 }  // namespace imProcess
+}  // namespace skyCorpusa
 
 #endif // IMAGE_READER_H

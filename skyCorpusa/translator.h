@@ -6,10 +6,14 @@
 #ifndef TRANSLATOR_H
 #define TRANSLATOR_H
 
+namespace skyCorpusa {
+
 class translator
 {
 public:
   translator();
 };
+
+}  // namespace skyCorpusa
 
 #endif // TRANSLATOR_H

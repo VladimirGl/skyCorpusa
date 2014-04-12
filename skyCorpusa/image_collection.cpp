@@ -5,6 +5,7 @@
 
 #include "image_collection.h"
 
+namespace skyCorpusa {
 namespace imProcess {
 
 const int querySize = 10;
@@ -52,3 +53,4 @@ int ImageCollection::aeroData(int num) const {
 }
 
 }  // namespace imProcessing
+}  // namespace skyCorpusa

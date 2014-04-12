@@ -5,6 +5,7 @@
 
 #include "image_reader.h"
 
+namespace skyCorpusa {
 namespace imProcess {
 
 ImageReader::ImageReader() :
@@ -26,3 +27,4 @@ QImage ImageReader::image() const {
 }
 
 }  // namespace imProcess
+}  // namespace skyCorpusa

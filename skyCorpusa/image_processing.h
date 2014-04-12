@@ -10,6 +10,7 @@
 
 #include "im_processing_data.h"
 
+namespace skyCorpusa {
 namespace imProcess {
 
 class ImageProcessing
@@ -31,5 +32,6 @@ private:
 };
 
 }  // namespace imProcess
+}  // namespace skyCorpusa
 
 #endif // IMAGE_PROCESSING_H

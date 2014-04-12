@@ -5,6 +5,10 @@
 
 #include "translator.h"
 
+namespace skyCorpusa {
+
 translator::translator()
 {
 }
+
+}  // namespace skyCorpusa
