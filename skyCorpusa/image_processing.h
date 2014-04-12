@@ -30,13 +30,29 @@ public:
 protected:
   int brightness(int R, int G, int B) const;
 
+  void skyProcessing();
+  void cloudProcessing();
+
   bool isSky(int R, int G, int B) const;
   bool isCloud(int R, int G, int B) const;
+
+  int toSkyLevel() const;
+  int toCloudLevel(int R, int G, int B) const;
+  int toCloudType(int R, int G, int B) const;
+  int toBrighness() const;
 
 private:
   QImage mImage;
   bool **mIsSky;
   bool **mIsCloud;
+
+  int skyR;
+  int skyG;
+  int skyB;
+  int mSkyCount;
+  int mCloudCount;
+
+  int mBrightness;
 
   ImProcessingData mData;
 };

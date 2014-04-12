@@ -9,6 +9,7 @@
 
 #include <QRgb>
 #include <QColor>
+#include <qmath.h>
 
 namespace skyCorpusa {
 namespace imProcess {
@@ -68,13 +69,20 @@ void ImageProcessing::loadImage(const QImage &image) {
 void ImageProcessing::compute() {
   if (mImage.isNull()) return;
 
+  skyProcessing();
+
+}
+
+void ImageProcessing::skyProcessing() {
   int w = mImage.width();
   int h = mImage.height();
 
   int hFrom = (h / 3) * 2;
 
-  int skyCount = 0;
-  int cloudCount = 0;
+  int sRed = 0;
+  int sGreen = 0;
+  int sBlue = 0;
+
   for (int i = hFrom; i < h; i++) {
     for (int j = 0; j < w; j++) {
       QRgb pix = mImage.pixel(j, i);
@@ -83,21 +91,43 @@ void ImageProcessing::compute() {
       int blue = qBlue(pix);
 
       mIsSky[i][j] = isSky(red, green, blue);
-      mIsCloud[i][j] = isCloud(red, green, blue);
-      if (mIsSky[i][j]) { skyCount++; }
-      if (mIsCloud[i][j]) { cloudCount++; }
+      if (mIsSky[i][j]) {
+        mSkyCount++;
+
+        QRgb pix = mImage.pixel(j, i);
+        int red = qRed(pix);
+        int green = qGreen(pix);
+        int blue = qBlue(pix);
+
+        sRed += red;
+        sGreen += green;
+        sBlue += blue;
+
+        mBrightness += brightness(red, green, blue);
+      }
     }
   }
 
-  int sRed = 0;
-  int sGreen = 0;
-  int sBlue = 0;
+  if (mSkyCount) {
+    sRed   /= mSkyCount;
+    sGreen /= mSkyCount;
+    sBlue  /= mSkyCount;
+
+    skyR = sRed;
+    skyG = sGreen;
+    skyB = sBlue;
+  }
+}
+
+void ImageProcessing::cloudProcessing() {
+  int w = mImage.width();
+  int h = mImage.height();
+
+  int hFrom = (h / 3) * 2;
 
   int cRed = 0;
   int cGreen = 0;
   int cBlue = 0;
-
-  int bright = 0;
 
   for (int i = hFrom; i < h; i++) {
     for (int j = 0; j < w; j++) {
@@ -106,50 +136,33 @@ void ImageProcessing::compute() {
       int green = qGreen(pix);
       int blue = qBlue(pix);
 
-      if (mIsSky[i][j]) {
-        sRed += red;
-        sGreen += green;
-        sBlue += blue;
-        bright += brightness(red, green, blue);
-      }
-
+      mIsCloud[i][j] = isCloud(red, green, blue);
       if (mIsCloud[i][j]) {
+        mIsSky[i][j] = false;
+        mCloudCount++;
+
+        QRgb pix = mImage.pixel(j, i);
+        int red = qRed(pix);
+        int green = qGreen(pix);
+        int blue = qBlue(pix);
+
         cRed += red;
         cGreen += green;
         cBlue += blue;
-        bright += brightness(red, green, blue);
+
+        mBrightness += brightness(red, green, blue);
       }
     }
   }
 
-  if (skyCount && cloudCount) {
-    bright /= (skyCount + cloudCount);
+  if (mCloudCount) {
 
-    sRed   /= skyCount;
-    sGreen /= skyCount;
-    sBlue  /= skyCount;
+    cRed   /= mCloudCount;
+    cGreen /= mCloudCount;
+    cBlue  /= mCloudCount;
 
-    cRed   /= cloudCount;
-    cGreen /= cloudCount;
-    cBlue  /= cloudCount;
-
-
-
-    QColor color;
-    color.setRed(sRed);
-    color.setGreen(sGreen);
-    color.setBlue(sBlue);
-    QColor color2;
-    color2.setRed(cRed);
-    color2.setGreen(cGreen);
-    color2.setBlue(cBlue);
-    qDebug() << skyCount << " " << color.name();
-    qDebug() << cloudCount << " " << color2.name();
-    double quantee = (double)cloudCount / (cloudCount + skyCount);
-    qDebug() << (double)quantee;
-    qDebug() << bright;
+    mData.setCloudLevel( toCloudLevel(cRed, cGreen, cBlue) );
   }
-
 }
 
 int ImageProcessing::brightness(int R, int G, int B) const {
@@ -157,16 +170,54 @@ int ImageProcessing::brightness(int R, int G, int B) const {
 }
 
 bool ImageProcessing::isSky(int R, int G, int B) const {
-  return ( ((qAbs(R - (G / 2)) < 10) || (qAbs(R -G) < 10))
-           && (B > R)
+  return ( (B > R)
            && (B > G)
-           && (B > 50) );
+           && qAbs(B - G) > 25
+           && qAbs(B - R) > 25
+           && (B > 50) )
+      || ( (B > R)
+           && (B > G)
+           && qAbs(B - G) > 10
+           && qAbs(B - G) > 10
+           && (B > 200)
+           && (B < 230) );
 }
 
-bool ImageProcessing::isCloud(int R, int G, int B) const{
-  return ( (qAbs(R - G) < 10)
-           && (qAbs(B - G) < 10)
-           && (qAbs(R - B) < 10) );
+bool ImageProcessing::isCloud(int R, int G, int B) const {
+  bool isSkyHere = isSky(R, G, B);
+  bool isCloudHere = false;
+
+  if (isSkyHere) {
+    int dist = qSqrt(  (R - skyR) * (R - skyR)
+                     + (G - skyG) * (G - skyG)
+                     + (R - skyB) * (R - skyB)
+                     );
+
+    if (dist > 25) {
+      isCloudHere = true;
+    }
+  } else {
+    isCloudHere = (    qAbs(R - G) < 10
+                    && qAbs(R - B) < 10
+                    && qAbs(G - B) < 10);
+  }
+
+  return isCloudHere;
+}
+
+int ImageProcessing::toSkyLevel() const {
+
+}
+
+int ImageProcessing::toCloudLevel(int R, int G, int B) const {
+
+}
+
+int ImageProcessing::toCloudType(int R, int G, int B) const {
+
+}
+
+int ImageProcessing::toBrighness() const {
 }
 
 }  // namespace imProcess

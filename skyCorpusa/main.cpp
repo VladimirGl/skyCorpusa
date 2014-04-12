@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   Widget w;
 
-  QString test = "/home/rayman/Downloads/sky_4.JPG";
+  QString test = "/home/rayman/Downloads/sky_2.jpg";
 
   skyCorpusa::imProcess::ImageReader reader;
   reader.setPath(test);
@@ -29,8 +29,6 @@ int main(int argc, char *argv[])
   process.loadImage(im);
   process.compute();
   skyCorpusa::imProcess::ImProcessingData data = process.processed();
-
-  qDebug() << data.cloudLevel();
 
   w.show();
   
