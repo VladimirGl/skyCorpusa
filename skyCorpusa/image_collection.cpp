@@ -5,6 +5,10 @@
 
 #include "image_collection.h"
 
+namespace imProcess {
+
 ImageCollection::ImageCollection()
 {
 }
+
+}  // namespace imProcessing

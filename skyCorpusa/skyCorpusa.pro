@@ -19,17 +19,18 @@ SOURCES +=\
     widget.cpp \
     translator.cpp \
     server_processing.cpp \
-    aero_data.cpp \
-    sky_data.cpp \
-    image_collection.cpp
+    image_collection.cpp \
+    sky_data_read_write.cpp \
+    aero_data_read_write.cpp
 
 HEADERS  += widget.h \
     image_processing.h \
     image_reader.h \
     translator.h \
     server_processing.h \
-    aero_data.h \
-    sky_data.h \
-    image_collection.h
+    image_collection.h \
+    im_processing_data.h \
+    sky_data_read_write.h \
+    aero_data_read_write.h
 
 FORMS    += widget.ui

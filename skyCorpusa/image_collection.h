@@ -6,10 +6,30 @@
 #ifndef IMAGE_COLLECTION_H
 #define IMAGE_COLLECTION_H
 
+#include <QList>
+#include <QImage>
+
+#include "im_processing_data.h"
+
+namespace imProcess {
+
 class ImageCollection
 {
 public:
   ImageCollection();
+
+  void addImage(const QImage& im, const ImProcessingData& proc, int aData);
+  QImage image(int num) const;
+  ImProcessingData data(int num) const;
+  int aeroData(int num) const;
+
+private:
+  QList<QImage> mCollection;
+
+  QList<ImProcessingData> mProcesssingData;
+  QList<int> mAeroData;
 };
+
+}  // namespace imProcess
 
 #endif // IMAGE_COLLECTION_H
