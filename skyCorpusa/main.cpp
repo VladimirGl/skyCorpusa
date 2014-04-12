@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   QApplication a(argc, argv);
   Widget w;
 
-  QString test = "/home/rayman/Downloads/sky_2.jpg";
+  QString test = "/home/rayman/Downloads/sky_10.jpg";
 
   skyCorpusa::imProcess::ImageReader reader;
   reader.setPath(test);

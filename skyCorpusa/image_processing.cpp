@@ -16,6 +16,12 @@ namespace imProcess {
 
 ImageProcessing::ImageProcessing()
 {
+  mSkyCount = 0;
+  mCloudCount = 0;
+  skyR = 0;
+  skyG = 0;
+  skyB = 0;
+  mBrightness = 0;
 }
 
 ImageProcessing::~ImageProcessing() {
@@ -70,6 +76,7 @@ void ImageProcessing::compute() {
   if (mImage.isNull()) return;
 
   skyProcessing();
+  cloudProcessing();
 
 }
 
@@ -102,11 +109,11 @@ void ImageProcessing::skyProcessing() {
         sRed += red;
         sGreen += green;
         sBlue += blue;
-
-        mBrightness += brightness(red, green, blue);
       }
     }
   }
+
+  qDebug() << mSkyCount;
 
   if (mSkyCount) {
     sRed   /= mSkyCount;
@@ -116,6 +123,8 @@ void ImageProcessing::skyProcessing() {
     skyR = sRed;
     skyG = sGreen;
     skyB = sBlue;
+
+    mData.setSkyColor( toSkyLevel() );
   }
 }
 
@@ -138,7 +147,11 @@ void ImageProcessing::cloudProcessing() {
 
       mIsCloud[i][j] = isCloud(red, green, blue);
       if (mIsCloud[i][j]) {
-        mIsSky[i][j] = false;
+        if (mIsSky[i][j]) {
+          mIsSky[i][j] = false;
+          mSkyCount--;
+        }
+
         mCloudCount++;
 
         QRgb pix = mImage.pixel(j, i);
@@ -149,11 +162,11 @@ void ImageProcessing::cloudProcessing() {
         cRed += red;
         cGreen += green;
         cBlue += blue;
-
-        mBrightness += brightness(red, green, blue);
       }
     }
   }
+  qDebug() << mCloudCount;
+  qDebug() << mSkyCount;
 
   if (mCloudCount) {
 
@@ -161,7 +174,8 @@ void ImageProcessing::cloudProcessing() {
     cGreen /= mCloudCount;
     cBlue  /= mCloudCount;
 
-    mData.setCloudLevel( toCloudLevel(cRed, cGreen, cBlue) );
+    mData.setCloudLevel( toCloudLevel() );
+    mData.setCloudType( toCloudType(cRed, cGreen, cBlue) );
   }
 }
 
@@ -174,13 +188,14 @@ bool ImageProcessing::isSky(int R, int G, int B) const {
            && (B > G)
            && qAbs(B - G) > 25
            && qAbs(B - R) > 25
-           && (B > 50) )
+           && (B > 50)
+           && (B < 200) )
       || ( (B > R)
            && (B > G)
-           && qAbs(B - G) > 10
-           && qAbs(B - G) > 10
+           && qAbs(B - G) > 7
+           && qAbs(B - G) > 7
            && (B > 200)
-           && (B < 230) );
+           && (B < 250) );
 }
 
 bool ImageProcessing::isCloud(int R, int G, int B) const {
@@ -193,31 +208,96 @@ bool ImageProcessing::isCloud(int R, int G, int B) const {
                      + (R - skyB) * (R - skyB)
                      );
 
-    if (dist > 25) {
+    if (dist > 400) {
       isCloudHere = true;
     }
   } else {
-    isCloudHere = (    qAbs(R - G) < 10
-                    && qAbs(R - B) < 10
-                    && qAbs(G - B) < 10);
+    isCloudHere = (    qAbs(R - G) < 15
+                    && qAbs(R - B) < 15
+                    && qAbs(G - B) < 15);
   }
+
 
   return isCloudHere;
 }
 
 int ImageProcessing::toSkyLevel() const {
+  int l = (skyR + skyG + skyB) / 3;
 
+  l = 255 - l;
+  if (l < 50) {
+    return 1;
+  } else if (l < 100) {
+    return 2;
+  } else if (l < 150) {
+    return 3;
+  } else if (l < 200) {
+    return 4;
+  }
+
+  return 5;
 }
 
-int ImageProcessing::toCloudLevel(int R, int G, int B) const {
+int ImageProcessing::toCloudLevel() const {
+  double d = (double)mCloudCount / (mCloudCount + mSkyCount);
 
+  if (d < 0.05) {
+    return UnusuallyClear;
+  } else if (d < 0.4) {
+    return Clear;
+  } else if (d < 0.6) {
+    return SomewhatHazy;
+  } else if (d < 0.95) {
+    return VeryHazy;
+  }
+  return ExtremelyHazy;
 }
 
 int ImageProcessing::toCloudType(int R, int G, int B) const {
+  int l = (R + G + B) / 3;
 
+  l = 255 - l;
+  if (l < 50) {
+    return 1;
+  } else if (l < 100) {
+    return 2;
+  } else if (l < 150) {
+    return 3;
+  } else if (l < 200) {
+    return 4;
+  }
+
+  return 5;
 }
 
-int ImageProcessing::toBrighness() const {
+int ImageProcessing::toBrighness() {
+  int w = mImage.width();
+  int h = mImage.height();
+
+  int hFrom = (h / 3) * 2;
+
+  mBrightness = 0;
+  int counter = 0;
+
+  for (int i = hFrom; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      QRgb pix = mImage.pixel(j, i);
+      int red = qRed(pix);
+      int green = qGreen(pix);
+      int blue = qBlue(pix);
+
+      if (mIsCloud[i][j] || mIsSky[i][j]) {
+        mBrightness += brightness(red, green, blue);
+        counter++;
+      }
+    }
+  }
+
+  if (counter) {
+    mBrightness /= counter;
+  }
+
+  return mBrightness;
 }
 
 }  // namespace imProcess

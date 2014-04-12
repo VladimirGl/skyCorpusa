@@ -9,6 +9,14 @@
 namespace skyCorpusa {
 namespace imProcess {
 
+enum CloudLevel {
+  UnusuallyClear = 1,
+  Clear,
+  SomewhatHazy,
+  VeryHazy,
+  ExtremelyHazy
+};
+
 class ImProcessingData
 {
 public:

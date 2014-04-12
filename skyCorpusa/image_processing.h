@@ -37,9 +37,9 @@ protected:
   bool isCloud(int R, int G, int B) const;
 
   int toSkyLevel() const;
-  int toCloudLevel(int R, int G, int B) const;
+  int toCloudLevel() const;
   int toCloudType(int R, int G, int B) const;
-  int toBrighness() const;
+  int toBrighness();
 
 private:
   QImage mImage;
