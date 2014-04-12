@@ -7,6 +7,7 @@
 #define IMAGE_PROCESSING_H
 
 #include <QImage>
+#include <QMatrix>
 
 #include "im_processing_data.h"
 
@@ -17,16 +18,25 @@ class ImageProcessing
 {
 public:
   ImageProcessing();
+  ~ImageProcessing();
 
-  void loadImage(const QImage& image) { mImage = image; }
+  void loadImage(const QImage& image);
   ImProcessingData processed() const { return mData; }
 
   // Main method of the class. Here are made all the callculation.
   // Look ImProcessingData class and inside this method for more information.
   void compute();
 
+protected:
+  int brightness(int R, int G, int B) const;
+
+  bool isSky(int R, int G, int B) const;
+  bool isCloud(int R, int G, int B) const;
+
 private:
   QImage mImage;
+  bool **mIsSky;
+  bool **mIsCloud;
 
   ImProcessingData mData;
 };
