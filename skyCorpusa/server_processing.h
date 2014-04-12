@@ -10,6 +10,8 @@ class ServerProcessing
 {
 public:
   ServerProcessing();
+
+private:
 };
 
 #endif // SERVER_PROCESSING_H
