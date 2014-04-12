@@ -3,22 +3,14 @@
 // LICENSE file.
 // Author: Glazachev Vladimir <glazachev.vladimir@gmail.com>
 
-#ifndef SERVER_PROCESSING_H
-#define SERVER_PROCESSING_H
+#include "data_IO.h"
 
 namespace skyCorpusa {
 namespace server {
 
-class ServerProcessing
+DataIO::DataIO()
 {
-public:
-  ServerProcessing();
-
-private:
-};
+}
 
 }  // namespace server
 }  // namespace skyCorpusa
-
-
-#endif // SERVER_PROCESSING_H

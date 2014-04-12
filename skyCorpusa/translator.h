@@ -8,6 +8,10 @@
 
 #include <QImage>
 
+#include "aeronet_data_type.h"
+#include "im_processing_data.h"
+#include "data_IO.h"
+
 namespace skyCorpusa {
 
 class translator
@@ -16,6 +20,9 @@ public:
   translator();
 
   void loadImage(const QImage& image);
+  AERONETDataType lastImageData() const;
+
+private:
 
 };
 
