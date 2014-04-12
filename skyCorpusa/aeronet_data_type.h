@@ -14,6 +14,10 @@ class AERONETDataType
 {
 public:
   AERONETDataType();
+
+private:
+  int x;
+  int y;
 };
 
 }  // namespace skyCorpusa

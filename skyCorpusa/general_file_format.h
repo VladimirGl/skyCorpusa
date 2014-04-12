@@ -3,30 +3,30 @@
 // LICENSE file.
 // Author: Glazachev Vladimir <glazachev.vladimir@gmail.com>
 
-#ifndef AERO_DATA_READ_WRITE_H
-#define AERO_DATA_READ_WRITE_H
+#ifndef GENERAL_FILE_FORMAT_H
+#define GENERAL_FILE_FORMAT_H
 
+#include "im_processing_data.h"
 #include "aeronet_data_type.h"
 
-#include <QtSql>
-#include <QString>
+#include <QList>
 
 namespace skyCorpusa {
-namespace dataIO {
 
-class AERODataReadWrite
+class GeneralFileFormat
 {
 public:
-  AERODataReadWrite(const QString& name);
+  GeneralFileFormat();
 
-  AERONETDataType data(int x, int y);
+  void fillImageData(ImProcessingData data);
+  void fillAeroData(AERONETDataType data);
+
+  QList<int> datas();
 
 private:
-  QSqlDatabase mBase;
+  QList<int> mDatas;
 };
 
-}  // namespace dataIO
 }  // namespace skyCorpusa
 
-
-#endif // AERO_DATA_READ_WRITE_H
+#endif // GENERAL_FILE_FORMAT_H

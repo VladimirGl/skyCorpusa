@@ -28,7 +28,7 @@ SkyDataReadWrite::SkyDataReadWrite(const QString& name)
   }
 }
 
-void SkyDataReadWrite::pushData(ImProcessingData data) {
+void SkyDataReadWrite::pushData(const ImProcessingData &data) {
   if (!mBase.isOpen()) {
     qDebug() << "[!] Base not opened";
 

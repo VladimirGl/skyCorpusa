@@ -8,8 +8,18 @@
 namespace skyCorpusa {
 namespace dataIO {
 
-DataIO::DataIO()
+const QString pathBase = "/home/rayman/Downloads/sky_corpusa";
+const QString aBase = "blabla";
+const QString sBase = "bleble";
+
+DataIO::DataIO() :
+  mAeroReader(AERODataReadWrite(pathBase + "/" + aBase)),
+  mSkyWriter(SkyDataReadWrite(pathBase + "/" + sBase))
+{}
+
+GeneralFileFormat DataIO::data(ImProcessingData imData, int x, int y)
 {
+
 }
 
 }  // namespace dataIO

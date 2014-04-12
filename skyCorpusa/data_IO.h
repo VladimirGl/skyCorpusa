@@ -6,6 +6,11 @@
 #ifndef DATA_PROCESSING_H
 #define DATA_PROCESSING_H
 
+#include "general_file_format.h"
+
+#include "aero_data_read_write.h"
+#include "sky_data_read_write.h"
+
 namespace skyCorpusa {
 namespace dataIO {
 
@@ -14,7 +19,11 @@ class DataIO
 public:
   DataIO();
 
+  GeneralFileFormat data(ImProcessingData imData, int x, int y);
+
 private:
+  AERODataReadWrite mAeroReader;
+  SkyDataReadWrite  mSkyWriter;
 };
 
 }  // namespace dataIO

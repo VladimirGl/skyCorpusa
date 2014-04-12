@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
   QString test = "/home/rayman/Downloads/sky_10.jpg";
 
-  skyCorpusa::imProcess::ImageReader reader;
+  skyCorpusa::ImageReader reader;
   reader.setPath(test);
   QImage im  = reader.image();
   im.save("/home/rayman/Downloads/sky_2_2.jpg");

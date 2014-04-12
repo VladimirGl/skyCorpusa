@@ -23,7 +23,8 @@ SOURCES +=\
     aero_data_read_write.cpp \
     aeronet_data_type.cpp \
     data_IO.cpp \
-    collection_processing.cpp
+    collection_processing.cpp \
+    general_file_format.cpp
 
 HEADERS  += widget.h \
     image_processing.h \
@@ -35,6 +36,9 @@ HEADERS  += widget.h \
     aero_data_read_write.h \
     aeronet_data_type.h \
     data_IO.h \
-    collection_processing.h
+    collection_processing.h \
+    general_file_format.h
 
 FORMS    += widget.ui
+
+PRPATH = $$PWD

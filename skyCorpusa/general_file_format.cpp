@@ -3,19 +3,25 @@
 // LICENSE file.
 // Author: Glazachev Vladimir <glazachev.vladimir@gmail.com>
 
-#include "aero_data_read_write.h"
+#include "general_file_format.h"
 
 namespace skyCorpusa {
-namespace dataIO {
 
-AERODataReadWrite::AERODataReadWrite(const QString &name)
+GeneralFileFormat::GeneralFileFormat()
 {
 }
 
-AERONETDataType AERODataReadWrite::data(int x, int y)
-{
+void GeneralFileFormat::fillImageData(ImProcessingData data) {
 
 }
 
-}  // namespace dataIO
+void GeneralFileFormat::fillAeroData(AERONETDataType data) {
+
+}
+
+QList<int> GeneralFileFormat::datas() {
+
+}
+
+
 }  // namespace skyCorpusa

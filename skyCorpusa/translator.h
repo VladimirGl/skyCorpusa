@@ -8,21 +8,22 @@
 
 #include <QImage>
 
-#include "aeronet_data_type.h"
-#include "im_processing_data.h"
+#include "general_file_format.h"
 #include "data_IO.h"
 #include "collection_processing.h"
 #include "image_collection.h"
 
 namespace skyCorpusa {
 
-class translator
+class Translator
 {
 public:
-  translator();
+  Translator();
 
-  void loadImage(const QImage& image);
-  AERONETDataType lastImageData() const;
+  void init();
+
+  void loadImage(const QImage& image, int x, int y);
+  GeneralFileFormat lastData() const;
 
   imProcess::ImageCollection collection() const;
 
@@ -30,6 +31,10 @@ public:
 private:
   dataIO::DataIO mData;
   CollectionProcessing mCollection;
+
+  GeneralFileFormat mLastData;
+
+  int mCounter;
 };
 
 }  // namespace skyCorpusa

@@ -5,12 +5,42 @@
 
 #include "translator.h"
 
+#include "image_processing.h"
+
+#include <QString>
+
+const QString path = "/home/rayman/Downloads/sky_corpusa/images";
+
 namespace skyCorpusa {
 
-translator::translator()
+Translator::Translator()
 {
 }
 
+void Translator::init() {
+
+}
+
+void Translator::loadImage(const QImage &image, int x, int y) {
+  imProcess::ImageProcessing process;
+  process.loadImage(image);
+  process.compute();
+
+  image.save(path + "/" + QString::number(mCounter) + ".jpg");
+  mCounter++;
+
+  mLastData = mData.data(process.processed(), x, y);
+
+
+}
+
+GeneralFileFormat Translator::lastData() const {
+
+}
+
+imProcess::ImageCollection Translator::collection() const {
+
+}
 
 
 }  // namespace skyCorpusa

@@ -6,7 +6,6 @@
 #include "image_reader.h"
 
 namespace skyCorpusa {
-namespace imProcess {
 
 ImageReader::ImageReader() :
   mH(480),
@@ -25,5 +24,4 @@ QImage ImageReader::image() const {
   // DO IMAGE CAPTURE
 }
 
-}  // namespace imProcess
 }  // namespace skyCorpusa

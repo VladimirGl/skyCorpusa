@@ -19,7 +19,7 @@ class SkyDataReadWrite
 public:
   SkyDataReadWrite(const QString& name);
 
-  void pushData(ImProcessingData data);
+  void pushData(const ImProcessingData& data);
 
 
 private:
