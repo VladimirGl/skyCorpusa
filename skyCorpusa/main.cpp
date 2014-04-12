@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
   skyCorpusa::imProcess::ImageProcessing process;
   process.loadImage(im);
   process.compute();
-  skyCorpusa::imProcess::ImProcessingData data = process.processed();
+  skyCorpusa::ImProcessingData data = process.processed();
   qDebug() << "data : " << data.skyColor() << " " << data.cloudLevel() << " " << data.cloudType() << " " << data.sunLevel();
 
   w.show();

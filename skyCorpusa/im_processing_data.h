@@ -7,7 +7,6 @@
 #define IM_PROCESSING_DATA_H
 
 namespace skyCorpusa {
-namespace imProcess {
 
 enum CloudLevel {
   UnusuallyClear = 1,
@@ -52,7 +51,6 @@ private:
   int mSunLevel;
 };
 
-}  // namespace imProcess
 }  // namespace skyCorpusa
 
 #endif // IM_PROCESSING_DATA_H

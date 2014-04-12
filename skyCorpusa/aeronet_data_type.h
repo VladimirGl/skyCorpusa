@@ -3,22 +3,19 @@
 // LICENSE file.
 // Author: Glazachev Vladimir <glazachev.vladimir@gmail.com>
 
-#ifndef TRANSLATOR_H
-#define TRANSLATOR_H
+#ifndef AERONET_DATA_TYPE_H
+#define AERONET_DATA_TYPE_H
 
 #include <QImage>
 
 namespace skyCorpusa {
 
-class translator
+class AERONETDataType
 {
 public:
-  translator();
-
-  void loadImage(const QImage& image);
-
+  AERONETDataType();
 };
 
 }  // namespace skyCorpusa
 
-#endif // TRANSLATOR_H
+#endif // AERONET_DATA_TYPE_H
