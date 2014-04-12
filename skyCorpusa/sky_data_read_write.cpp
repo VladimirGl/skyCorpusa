@@ -8,7 +8,7 @@
 #include <QDebug>
 
 namespace skyCorpusa {
-namespace server {
+namespace dataIO {
 
 SkyDataReadWrite::SkyDataReadWrite(const QString& name)
 {
@@ -52,5 +52,5 @@ void SkyDataReadWrite::pushData(ImProcessingData data) {
 
 
 
+}  // namespace dataIO
 }  // namespace skyCorpusa
-}  // namespace server

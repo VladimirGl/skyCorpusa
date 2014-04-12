@@ -12,7 +12,7 @@
 #include "im_processing_data.h"
 
 namespace skyCorpusa {
-namespace server {
+namespace dataIO {
 
 class SkyDataReadWrite
 {
@@ -26,7 +26,7 @@ private:
   QSqlDatabase mBase;
 };
 
-}  // namespace server
+}  // namespace dataIO
 }  // namespace skyCorpusa
 
 #endif // SKY_DATA_READ_WRITE_H

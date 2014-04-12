@@ -10,7 +10,7 @@
 #include <QString>
 
 namespace skyCorpusa {
-namespace server {
+namespace dataIO {
 
 class AERODataReadWrite
 {
@@ -18,7 +18,7 @@ public:
   AERODataReadWrite();
 };
 
-}  // namespace server
+}  // namespace dataIO
 }  // namespace skyCorpusa
 
 

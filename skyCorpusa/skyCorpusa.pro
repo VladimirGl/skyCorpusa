@@ -21,9 +21,9 @@ SOURCES +=\
     image_collection.cpp \
     sky_data_read_write.cpp \
     aero_data_read_write.cpp \
-    collection.cpp \
     aeronet_data_type.cpp \
-    data_IO.cpp
+    data_IO.cpp \
+    collection_processing.cpp
 
 HEADERS  += widget.h \
     image_processing.h \
@@ -34,7 +34,7 @@ HEADERS  += widget.h \
     sky_data_read_write.h \
     aero_data_read_write.h \
     aeronet_data_type.h \
-    collection.h \
-    data_IO.h
+    data_IO.h \
+    collection_processing.h
 
 FORMS    += widget.ui

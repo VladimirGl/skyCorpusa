@@ -11,6 +11,8 @@
 #include "aeronet_data_type.h"
 #include "im_processing_data.h"
 #include "data_IO.h"
+#include "collection_processing.h"
+#include "image_collection.h"
 
 namespace skyCorpusa {
 
@@ -22,8 +24,12 @@ public:
   void loadImage(const QImage& image);
   AERONETDataType lastImageData() const;
 
-private:
+  imProcess::ImageCollection collection() const;
 
+
+private:
+  dataIO::DataIO mData;
+  CollectionProcessing mCollection;
 };
 
 }  // namespace skyCorpusa

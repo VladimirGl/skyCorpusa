@@ -3,17 +3,17 @@
 // LICENSE file.
 // Author: Glazachev Vladimir <glazachev.vladimir@gmail.com>
 
-#ifndef COLLECTION_H
-#define COLLECTION_H
+#ifndef COLLECTION_PROCESSING_H
+#define COLLECTION_PROCESSING_H
 
 namespace skyCorpusa {
 
-class Collection
+class CollectionProcessing
 {
 public:
-  Collection();
+  CollectionProcessing();
 };
 
 }  // namespace skyCorpusa
 
-#endif // COLLECTION_H
+#endif // COLLECTION_PROCESSING_H

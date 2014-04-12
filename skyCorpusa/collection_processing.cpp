@@ -3,11 +3,11 @@
 // LICENSE file.
 // Author: Glazachev Vladimir <glazachev.vladimir@gmail.com>
 
-#include "collection.h"
+#include "collection_processing.h"
 
 namespace skyCorpusa {
 
-Collection::Collection()
+CollectionProcessing::CollectionProcessing()
 {
 }
 

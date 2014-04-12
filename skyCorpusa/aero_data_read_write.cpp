@@ -6,11 +6,11 @@
 #include "aero_data_read_write.h"
 
 namespace skyCorpusa {
-namespace server {
+namespace dataIO {
 
 AERODataReadWrite::AERODataReadWrite()
 {
 }
 
-}  // namespace server
+}  // namespace dataIO
 }  // namespace skyCorpusa

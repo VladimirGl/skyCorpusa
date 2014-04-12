@@ -52,5 +52,5 @@ int ImageCollection::aeroData(int num) const {
   return mAeroData.at(num);
 }
 
-}  // namespace imProcessing
+}  // namespace imProcess
 }  // namespace skyCorpusa

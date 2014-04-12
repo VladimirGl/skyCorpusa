@@ -6,11 +6,11 @@
 #include "data_IO.h"
 
 namespace skyCorpusa {
-namespace server {
+namespace dataIO {
 
 DataIO::DataIO()
 {
 }
 
-}  // namespace server
+}  // namespace dataIO
 }  // namespace skyCorpusa
