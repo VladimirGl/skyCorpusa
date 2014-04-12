@@ -46,9 +46,9 @@ private:
   bool **mIsSky;
   bool **mIsCloud;
 
-  int skyR;
-  int skyG;
-  int skyB;
+  int mSkyR;
+  int mSkyG;
+  int mSkyB;
   int mSkyCount;
   int mCloudCount;
 

@@ -18,9 +18,9 @@ ImageProcessing::ImageProcessing()
 {
   mSkyCount = 0;
   mCloudCount = 0;
-  skyR = 0;
-  skyG = 0;
-  skyB = 0;
+  mSkyR = 0;
+  mSkyG = 0;
+  mSkyB = 0;
   mBrightness = 0;
 }
 
@@ -120,9 +120,9 @@ void ImageProcessing::skyProcessing() {
     sGreen /= mSkyCount;
     sBlue  /= mSkyCount;
 
-    skyR = sRed;
-    skyG = sGreen;
-    skyB = sBlue;
+    mSkyR = sRed;
+    mSkyG = sGreen;
+    mSkyB = sBlue;
 
     mData.setSkyColor( toSkyLevel() );
   }
@@ -176,6 +176,7 @@ void ImageProcessing::cloudProcessing() {
 
     mData.setCloudLevel( toCloudLevel() );
     mData.setCloudType( toCloudType(cRed, cGreen, cBlue) );
+    mData.setSunLevel( toBrighness() );
   }
 }
 
@@ -203,9 +204,9 @@ bool ImageProcessing::isCloud(int R, int G, int B) const {
   bool isCloudHere = false;
 
   if (isSkyHere) {
-    int dist = qSqrt(  (R - skyR) * (R - skyR)
-                     + (G - skyG) * (G - skyG)
-                     + (R - skyB) * (R - skyB)
+    int dist = qSqrt(  (R - mSkyR) * (R - mSkyR)
+                     + (G - mSkyG) * (G - mSkyG)
+                     + (R - mSkyB) * (R - mSkyB)
                      );
 
     if (dist > 400) {
@@ -222,7 +223,7 @@ bool ImageProcessing::isCloud(int R, int G, int B) const {
 }
 
 int ImageProcessing::toSkyLevel() const {
-  int l = (skyR + skyG + skyB) / 3;
+  int l = (mSkyR + mSkyG + mSkyB) / 3;
 
   l = 255 - l;
   if (l < 50) {
