@@ -26,7 +26,7 @@ public:
   void setWidth(int width) { mW = width; }
 
   void setType(FromType type) { mFrom = type; }
-  void setFPath(const QString& path) { mPath = path; }
+  void setPath(const QString& path) { mPath = path; }
 
   int w() const { return mW; }
   int h() const { return mH; }

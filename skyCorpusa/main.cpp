@@ -6,10 +6,26 @@
 #include "widget.h"
 #include <QApplication>
 
+#include <QImage>
+#include <QString>
+#include <QDebug>
+
+#include "image_reader.h"
+#include "image_processing.h"
+
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   Widget w;
+
+  QString test = "/home/rayman/Downloads/sky-09.jpg";
+
+  skyCorpusa::imProcess::ImageReader reader;
+  reader.setPath(test);
+  QImage im  = reader.image();
+
+  qDebug() << im.height();
+
   w.show();
   
   return a.exec();

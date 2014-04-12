@@ -19,8 +19,7 @@ QImage ImageReader::image() const {
 
   if (mFrom == File) {
     QImage im(mPath);
-    im.scaled(mW, mH);
-    return im;
+    return im.scaled(mW, mH);
   }
 
   // DO IMAGE CAPTURE
