@@ -33,7 +33,9 @@ protected:
   void skyProcessing();
   void cloudProcessing();
 
+  // Returns true, if point can be the sky. The rule follows the empirical observation.
   bool isSky(int R, int G, int B) const;
+  // Returns true, if point can be the cloud. If point can be as sky as cloud, then sets point as cloud.
   bool isCloud(int R, int G, int B) const;
 
   int toSkyLevel() const;
