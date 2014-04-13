@@ -9,7 +9,7 @@ namespace skyCorpusa {
 
 ImageReader::ImageReader() :
   mH(480),
-  mW(640),
+  mW(515),
   mPath(""),
   mFrom(File)
 {}

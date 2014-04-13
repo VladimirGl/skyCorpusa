@@ -27,6 +27,9 @@ public:
 
   imProcess::ImageCollection collection() const;
 
+  QColor sky() const { return mSky; }
+  QColor cloud() const { return mCloud; }
+
 private:
   dataIO::DataIO mData;
   CollectionProcessing mCollection;
@@ -34,6 +37,9 @@ private:
   GeneralFileFormat mLastData;
 
   int mCounter;
+
+  QColor mSky;
+  QColor mCloud;
 };
 
 }  // namespace skyCorpusa

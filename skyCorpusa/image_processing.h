@@ -8,6 +8,7 @@
 
 #include <QImage>
 #include <QMatrix>
+#include <QRgb>
 
 #include "im_processing_data.h"
 
@@ -26,6 +27,9 @@ public:
   // Main method of the class. Here are made all the callculation.
   // Look ImProcessingData class and inside this method for more information.
   void compute();
+
+  QColor sky() const;
+  QColor cloud() const;
 
 protected:
   int brightness(int R, int G, int B) const;
@@ -53,6 +57,10 @@ private:
   int mSkyB;
   int mSkyCount;
   int mCloudCount;
+
+  int mCloudR;
+  int mCloudG;
+  int mCloudB;
 
   int mBrightness;
 

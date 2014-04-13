@@ -7,6 +7,9 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QList>
+
+#include "translator.h"
 
 namespace Ui {
 class Widget;
@@ -22,6 +25,9 @@ public:
   
 private:
   Ui::Widget *ui;
+  skyCorpusa::Translator translator;
+
+  QList<QString> colors;
 };
 
 #endif // WIDGET_H

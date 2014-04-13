@@ -9,7 +9,7 @@
 
 #include <QString>
 
-const QString path = "/home/rayman/Downloads/sky_corpusa/images";
+const QString path = "/home/rayman/Downloads/sky_corpusa/image_base";
 
 namespace skyCorpusa {
 
@@ -25,6 +25,9 @@ void Translator::loadImage(const QImage &image, int x, int y) {
   imProcess::ImageProcessing process;
   process.loadImage(image);
   process.compute();
+
+  mSky = process.sky();
+  mCloud = process.cloud();
 
   image.save(path + "/" + QString::number(mCounter) + ".jpg");
   mCounter++;

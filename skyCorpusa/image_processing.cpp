@@ -8,6 +8,7 @@
 #include <QRgb>
 #include <QColor>
 #include <qmath.h>
+#include <QDebug>
 
 namespace skyCorpusa {
 namespace imProcess {
@@ -20,6 +21,9 @@ ImageProcessing::ImageProcessing()
   mSkyG = 0;
   mSkyB = 0;
   mBrightness = 0;
+  mCloudR = 0;
+  mCloudG = 0;
+  mCloudB = 0;
 }
 
 ImageProcessing::~ImageProcessing() {
@@ -76,6 +80,16 @@ void ImageProcessing::compute() {
   skyProcessing();
   cloudProcessing();
 
+}
+
+QColor ImageProcessing::sky() const
+{
+  return QColor(mSkyR, mSkyG, mSkyB);
+}
+
+QColor ImageProcessing::cloud() const
+{
+  return QColor(mCloudR, mCloudG, mCloudB);
 }
 
 void ImageProcessing::skyProcessing() {
@@ -168,6 +182,10 @@ void ImageProcessing::cloudProcessing() {
     cGreen /= mCloudCount;
     cBlue  /= mCloudCount;
 
+    mCloudR = cRed;
+    mCloudG = cGreen;
+    mCloudB = cBlue;
+
     mData.setCloudLevel( toCloudLevel() );
     mData.setCloudType( toCloudType(cRed, cGreen, cBlue) );
     mData.setSunLevel( toBrighness() );
@@ -239,6 +257,7 @@ int ImageProcessing::toSkyLevel() const {
 
 int ImageProcessing::toCloudLevel() const {
   double d = (double)mCloudCount / (mCloudCount + mSkyCount);
+  qDebug() << d;
 
   if (d < 0.05) {
     return UnusuallyClear;

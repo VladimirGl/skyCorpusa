@@ -22,22 +22,6 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   Widget w;
-
-  QString test = "/home/rayman/Downloads/sky_2.jpg";
-
-  skyCorpusa::ImageReader reader;
-  reader.setPath(test);
-  QImage im  = reader.image();
-  im.save("/home/rayman/Downloads/sky_2_2.jpg");
-
-  skyCorpusa::Translator translator;
-  translator.init();
-  translator.loadImage(im, 250, 12);
-  skyCorpusa::GeneralFileFormat form;
-  form = translator.lastData();
-  qDebug() << form.city() << " " << form.aot();
-  qDebug() << form.sky() << " " << form.cl1() << " " << form.cl2() << " " << form.sun();
-
   w.show();
   
   return a.exec();
