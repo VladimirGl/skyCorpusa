@@ -7,20 +7,26 @@
 
 namespace skyCorpusa {
 
-GeneralFileFormat::GeneralFileFormat()
+GeneralFileFormat::GeneralFileFormat() :
+  mCity("no"),
+  mAOT(0),
+  mSky(0),
+  mCl1(0),
+  mCl2(0),
+  mSun(0)
 {
 }
 
 void GeneralFileFormat::fillImageData(ImProcessingData data) {
-
+  mSky = data.skyColor();
+  mCl1 = data.cloudLevel();
+  mCl2 = data.cloudType();
+  mSun = data.sunLevel();
 }
 
 void GeneralFileFormat::fillAeroData(AERONETDataType data) {
-
-}
-
-QList<int> GeneralFileFormat::datas() {
-
+  mCity = data.nearestCity();
+  mAOT = data.aot1020();
 }
 
 

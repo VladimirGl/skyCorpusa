@@ -5,6 +5,9 @@
 
 #include "aero_data_read_write.h"
 
+#include <QFile>
+#include <QTextStream>
+
 namespace skyCorpusa {
 namespace dataIO {
 
@@ -14,7 +17,22 @@ AERODataReadWrite::AERODataReadWrite(const QString &name)
 
 AERONETDataType AERODataReadWrite::data(int x, int y)
 {
+  QFile file("/home/rayman/Downloads/sky_corpusa/moscow.csv");
+  file.open(QIODevice::ReadOnly);
+  QTextStream in(&file);
 
+  QString line = in.readLine();
+  line = in.readLine();
+
+  file.close();
+
+  QString med = line.mid(11, 8);
+  double aot = med.toDouble() * 100;
+  int aoot = (int)aot + 1;
+
+  AERONETDataType t;
+  t.set(x, y, "Moscow", aoot);
+  return t;
 }
 
 }  // namespace dataIO

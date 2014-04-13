@@ -21,10 +21,20 @@ public:
   void fillImageData(ImProcessingData data);
   void fillAeroData(AERONETDataType data);
 
-  QList<int> datas();
+  QString city() const { return mCity; }
+  int aot() const { return mAOT; }
+  int sky() const { return mSky; }
+  int cl1() const { return mCl1; }
+  int cl2() const { return mCl2; }
+  int sun() const { return mSun; }
 
 private:
-  QList<int> mDatas;
+  QString mCity;
+  int mAOT;
+  int mSky;
+  int mCl1;
+  int mCl2;
+  int mSun;
 };
 
 }  // namespace skyCorpusa

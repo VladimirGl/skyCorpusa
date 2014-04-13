@@ -7,6 +7,7 @@
 #define AERONET_DATA_TYPE_H
 
 #include <QImage>
+#include <QString>
 
 namespace skyCorpusa {
 
@@ -14,10 +15,15 @@ class AERONETDataType
 {
 public:
   AERONETDataType();
+  void set(int x, int y, const QString& city, int aot) { mX = x; mY = y; mCity = city; mAOT = aot; }
+  QString nearestCity() const;
+  int aot1020() const { return mAOT; }
 
 private:
-  int x;
-  int y;
+  int mAOT;
+  QString mCity;
+  int mX;
+  int mY;
 };
 
 }  // namespace skyCorpusa

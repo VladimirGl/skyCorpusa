@@ -27,7 +27,6 @@ public:
 
   imProcess::ImageCollection collection() const;
 
-
 private:
   dataIO::DataIO mData;
   CollectionProcessing mCollection;

@@ -28,26 +28,31 @@ SkyDataReadWrite::SkyDataReadWrite(const QString& name)
   }
 }
 
-void SkyDataReadWrite::pushData(const ImProcessingData &data) {
+void SkyDataReadWrite::pushData(const ImProcessingData &data, const AERONETDataType& aero) {
   if (!mBase.isOpen()) {
     qDebug() << "[!] Base not opened";
-
-    bool isOk = false;
-
-    QString str;
-    str = "INSERT INTO SkyData VALUES("
-          + QString::number(data.skyColor())
-          + ", "
-          + QString::number(data.cloudLevel())
-          + ", "
-          + QString::number(data.cloudType())
-          + ", "
-          + QString::number(data.sunLevel())
-          + ")";
-
-    QSqlQuery query;
-    isOk = query.exec(str);
+    return;
   }
+
+  bool isOk = false;
+
+  QString str;
+  str = "INSERT INTO skydata VALUES("
+        + QString::number(data.skyColor())
+        + ", "
+        + QString::number(data.cloudLevel())
+        + ", "
+        + QString::number(data.cloudType())
+        + ", "
+        + QString::number(data.sunLevel())
+        + ", "
+        + QString::number(aero.aot1020())
+        + ")";
+
+  QSqlQuery query;
+  isOk = query.exec(str);
+  qDebug() << isOk;
+  return;
 }
 
 

@@ -10,7 +10,7 @@ namespace dataIO {
 
 const QString pathBase = "/home/rayman/Downloads/sky_corpusa";
 const QString aBase = "blabla";
-const QString sBase = "bleble";
+const QString sBase = "sky_data";
 
 DataIO::DataIO() :
   mAeroReader(AERODataReadWrite(pathBase + "/" + aBase)),
@@ -19,7 +19,13 @@ DataIO::DataIO() :
 
 GeneralFileFormat DataIO::data(ImProcessingData imData, int x, int y)
 {
+  GeneralFileFormat f;
+  f.fillImageData(imData);
+  AERONETDataType a = mAeroReader.data(x, y);
+  f.fillAeroData(a);
 
+  mSkyWriter.pushData(imData, a);
+  return f;
 }
 
 }  // namespace dataIO

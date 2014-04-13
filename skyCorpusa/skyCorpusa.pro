@@ -40,5 +40,3 @@ HEADERS  += widget.h \
     general_file_format.h
 
 FORMS    += widget.ui
-
-PRPATH = $$PWD

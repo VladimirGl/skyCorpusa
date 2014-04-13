@@ -11,4 +11,9 @@ AERONETDataType::AERONETDataType()
 {
 }
 
+QString AERONETDataType::nearestCity() const
+{
+  return QString("Moscow");
+}
+
 }  // namespace skyCorpusa

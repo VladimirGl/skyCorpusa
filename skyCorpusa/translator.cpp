@@ -18,7 +18,7 @@ Translator::Translator()
 }
 
 void Translator::init() {
-
+  mCounter = 1;
 }
 
 void Translator::loadImage(const QImage &image, int x, int y) {
@@ -30,12 +30,10 @@ void Translator::loadImage(const QImage &image, int x, int y) {
   mCounter++;
 
   mLastData = mData.data(process.processed(), x, y);
-
-
 }
 
 GeneralFileFormat Translator::lastData() const {
-
+  return mLastData;
 }
 
 imProcess::ImageCollection Translator::collection() const {

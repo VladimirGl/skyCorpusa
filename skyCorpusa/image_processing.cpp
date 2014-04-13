@@ -3,8 +3,6 @@
 // LICENSE file.
 // Author: Glazachev Vladimir <glazachev.vladimir@gmail.com>
 
-#include <QDebug>
-
 #include "image_processing.h"
 
 #include <QRgb>
